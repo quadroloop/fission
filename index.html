@@ -44,7 +44,7 @@ $(window).load(function() {
 <input type="text" id="url" class="w3-input w3-hover-pale-green w3-bar-item w3-right" placeholder="Project Here!" style="font-size:19px;" title="Input project Address"></input>
 <a onclick="refresh();" class="w3-bar-item w3-button" title="Refresh Frames"><i class="fa fa-refresh w3-text-blue"></i> <b class="w3-text-indigo">Refresh</b></a>  
 <a id="mmode" onclick="mmode();" class="w3-bar-item w3-button" title="Minimize Project Window and View help"><i class="fa fa-comment w3-text-blue"></i> <b class="w3-text-indigo">Help</b></a>  
-<a id="pmode" class="w3-bar-item w3-button w3-right" title="Project Mode"><i id="ind" class="fa fa-circle w3-text-blue"></i> <b id="val" class="w3-text-blue">Local</b></a>  
+<a id="pmode" class="w3-bar-item w3-button w3-right" title="Project Mode"><i id="ind" class="fa fa-circle w3-text-blue"></i> <b id="val" class="w3-text-blue">Link here</b></a>  
 </div>
 </div>
 </div>
@@ -59,14 +59,16 @@ $(window).load(function() {
  </center>
  <p class="w3-text-grey w3-center"><b class="w3-text-indigo">How to Use:</b></p>
  <center>
- <p class="w3-text-blue">Simply type a link and press "Enter".</p>
- <img src="windows.png" class="w3-card-2 w3-border"><br>
+  <p class="w3-text-blue w3-padding">Simply type a link and press "Enter".</p>
+ <img src="live.png" class="w3-border w3-card-2">
+ <p>Live Mode <b class="w3-text-indigo">(Websites:)</b> Type the complete URL of your website, or other websites and the session will autommatically be live.</p>
+<p class="w3-text-green">Download Fission to use Local Mode.<br>also, make sure the the website your testing support iframe.</p>
+ <img src="windows.png" class="w3-card-2 w3-border w3-margin"><br>
  <p>Local Mode in <b class="w3-text-indigo">Windows:</b> Type the absolute path of your project files like so...</p>
  <img src="linux.png" class="w3-border w3-card-2"><br>
  <p>Local Mode in <b class="w3-text-indigo">Linux:</b> Type the absolute path of your project files like so.. it's obvious if your familiar with file systems of all operating systems.</p>
- <img src="live.png" class="w3-border w3-card-2">
- <p>Live Mode <b class="w3-text-indigo">(Websites:)</b> Type the complete URL of your website, or other websites and the session will autommatically be live.</p>
- <hr>
+ 
+ 
 
  </center>
 </div>
@@ -109,6 +111,7 @@ $(window).load(function() {
       if ( x.indexOf("https://") != -1 || x.indexOf("http://") != -1 ){
       	pmode();
       }else{
+        alert("Local Mode is not available online. click 'Download', to use it.");
       	toggle();
       	  }
  
@@ -212,10 +215,10 @@ $(window).load(function() {
     	var a = document.getElementById("ind");
     	var c = document.getElementById("url");
     	a.className = a.className.replace("w3-text-green"," w3-text-blue");
-    	document.getElementById("val").innerHTML = "Local";
+    	document.getElementById("val").innerHTML = "Link here";
     	var modecolor = document.getElementById("val");
     	modecolor.className = modecolor.className.replace("w3-text-green"," w3-text-blue");
-    	c.placeholder = "Project Absolute Path.."
+    	c.placeholder = "Url here.."
         //framestate--  
 
     }
