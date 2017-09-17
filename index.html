@@ -1,0 +1,256 @@
+<!--
+==============================================================================
+|#|  _____         _              |#|Fission Web/Web App. Development Tool.|#|
+|#| /  _(_)___ ___(_) ___  _ ___  |#|Split Screen UI Tester!               |#|                     
+|#| | |_| / __/ __| |/ _ \| '_  \ |#|======================================|#|
+|#| |  _| \__ \__ \ | (_) | | | | |#|* The Project is OpenSource!          |#|
+|#| |_| |_|___/___/_|\___/|_| |_| |#| 2017 (c) Bryce Narciso C. Mercines   |#| 
+==============================================================================
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<title>Fission - Spit Screen - Web UI Tester tool</title>
+<link rel="stylesheet" type="text/css" href="./css/fission.css">
+<link rel="icon" href="fission.png">
+
+<script src="jquery.min.js"></script>
+<script type="text/javascript">
+$(window).load(function() {
+	$(".loader").fadeOut("slow");
+})
+
+</script>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body style="background-color:e1e8ed;">
+<div class="loader">
+<center>
+<h3 class="w3-text-dark-grey w3-center" style="font-size:100px;margin-top:170px;"><i class="fa fa-adjust w3-spin "></i> <b class="w3-text-indigo">f</b>ission</h3>
+<p class="w3-text-blue thin">Free Web UI Tester tool.</p>
+<p class="w3-text-indigo thin">Loading...</p>
+</center>
+</div>
+ <div id="spinner">
+<div class="w3-top">
+<div class="w3-bar w3-card-2" style="background-color:rgba(202, 210, 209, 0.75);">
+<a class="w3-bar-item w3-text-grey" style="font-size:19px;"><i class="fa fa-adjust w3-spin"></i> <b class="w3-text-indigo">f</b>ission</a>
+<div style="font-size:19px;" class="thin w3-text-dark-grey">
+<a id="mobile" onclick="mobile(); noproject();" class="w3-bar-item w3-button" title="Display Mobile Screen! (Small Devices)"><i class="fa fa-mobile"></i> Mobile </a>
+<a id="tablet" onclick="tablet(); noproject();" class="w3-bar-item w3-button" title="Display Tablet Screen! (Medium Devices)"><i class="fa fa-tablet"></i> Tablet</a>
+<a id="split" onclick="split(); noproject();" class="w3-bar-item w3-button"  title="Split Screen, mobile and tablet device combination."><i class="fa fa-columns"></i> Split</a>
+<a id="desktop" onclick="desktop(); noproject();" class="w3-bar-item w3-button"  title="Display Desktop Screen!, (Large Devices)"><i class="fa fa-desktop"></i> Desktop</a> 
+<button onclick="main()" class="w3-btn w3-bar-item w3-right w3-black w3-medium" style="font-size:19px;"><i class="w3-spin fa fa-adjust fa-2x" title="Load Project!"></i></button>
+<input type="text" id="url" class="w3-input w3-hover-pale-green w3-bar-item w3-right" placeholder="Project Here!" style="font-size:19px;" title="Input project Address"></input>
+<a onclick="refresh();" class="w3-bar-item w3-button" title="Refresh Frames"><i class="fa fa-refresh w3-text-blue"></i> <b class="w3-text-indigo">Refresh</b></a>  
+<a id="mmode" onclick="mmode();" class="w3-bar-item w3-button" title="Minimize Project Window and View help"><i class="fa fa-comment w3-text-blue"></i> <b class="w3-text-indigo">Help</b></a>  
+<a id="pmode" class="w3-bar-item w3-button w3-right" title="Project Mode"><i id="ind" class="fa fa-circle w3-text-blue"></i> <b id="val" class="w3-text-blue">Local</b></a>  
+</div>
+</div>
+</div>
+<br>
+<br>
+
+<div id="noproject" style="display: block;">
+ <h3 class="w3-text-dark-grey w3-center" style="font-size:100px" id="nps"><i class="fa fa-adjust w3-spin "></i> No Project.</h3>
+ <h4 class="w3-text-grey w3-center">Put the Project Location on the <b class="w3-text-indigo">"Project Here"</b> box, to load a project!</h4>
+ <center>
+ <p id="banner"></p>
+ </center>
+ <p class="w3-text-grey w3-center"><b class="w3-text-indigo">How to Use:</b></p>
+ <center>
+ <p class="w3-text-blue">Simply type a link and press "Enter".</p>
+ <img src="windows.png" class="w3-card-2 w3-border"><br>
+ <p>Local Mode in <b class="w3-text-indigo">Windows:</b> Type the absolute path of your project files like so...</p>
+ <img src="linux.png" class="w3-border w3-card-2"><br>
+ <p>Local Mode in <b class="w3-text-indigo">Linux:</b> Type the absolute path of your project files like so.. it's obvious if your familiar with file systems of all operating systems.</p>
+ <img src="live.png" class="w3-border w3-card-2">
+ <p>Live Mode <b class="w3-text-indigo">(Websites:)</b> Type the complete URL of your website, or other websites and the session will autommatically be live.</p>
+ <hr>
+
+ </center>
+</div>
+<!--split-->
+<div id="xframe" class="w3-margin w3-container w3-white w3-round w3-card-4 w3-animate-bottom mode" style="display:none;">
+
+    <div id="frs1" class="w3-half" width="100px">
+     <iframe id="fr" src="" style="height:500px; width:360px;" class="w3-margin w3-round w3-animate-opacity"></iframe>
+    </div>
+
+    <div id="frs2" class="w3-half">
+      <iframe id="fr2" src="" style="height:500px; width:900px;" class="w3-margin w3-round w3-animate-opacity"></iframe>
+    </div>
+  </div>
+  <!--end split-->
+</body>
+<script>
+   
+       var framestate = 1;
+
+
+    var urx = document.getElementById("url");
+     urx.addEventListener("keydown", function (e) {
+      if (e.keyCode === 13) { 
+      	if ( urx.value == [     ] ) {
+          alert("Enter a project path!");
+      	}else{
+        main();
+        document.getElementById("nps").innerHTML = "fuck!";
+    }
+      }
+    });
+
+
+
+ 	  function main() {
+  	  	var x = document.getElementById("url").value;
+    document.getElementById("noproject").style = "display: none;"
+
+      if ( x.indexOf("https://") != -1 || x.indexOf("http://") != -1 ){
+      	pmode();
+      }else{
+      	toggle();
+      	  }
+ 
+    	 localStorage.setItem('frurl',x);
+    	 document.getElementById("fr").src = "./fission.framer.html";
+	document.getElementById("fr2").src = "./fission.framer.html";
+	document.getElementById("xframe").style = "display: block;" 
+  }
+
+    function mobile() {
+    	var frd = document.getElementById("fr2");
+    	var b = document.getElementById("mobile");
+    	var b1 = document.getElementById("tablet");
+    	var b2 = document.getElementById("split");
+    	var b3 = document.getElementById("desktop");
+    	var fs = document.getElementById("frs2");
+    	var fsm = document.getElementById("frs1");
+    	b1.className = b1.className.replace(" w3-blue"," ");
+    	b2.className = b2.className.replace(" w3-blue"," ");
+    	b3.className = b3.className.replace(" w3-blue"," ");
+    	b.className = "w3-bar-item w3-button" + " w3-blue";
+    	fsm.className = fsm.className.replace("w3-half"," w3-center");
+    	frd.style = "height:500px; width:900px;";
+    	fsm.style = "display:block;";
+    	fs.style = "display:none;";
+    	document.getElementById("xframe").style = "display: block;"
+    }
+
+     function tablet() {
+     	var frd = document.getElementById("fr2");
+    	var b = document.getElementById("tablet");
+    	var b1 = document.getElementById("mobile");
+    	var b2 = document.getElementById("split");
+    	var b3 = document.getElementById("desktop");
+    	b1.className = b1.className.replace(" w3-blue"," ");
+    	b2.className = b2.className.replace(" w3-blue"," ");
+    	b3.className = b3.className.replace(" w3-blue"," ");
+    	var fs = document.getElementById("frs1");
+    	var fsm = document.getElementById("frs2");
+    	b.className = "w3-bar-item w3-button" + " w3-blue";
+    	fsm.className = fsm.className.replace("w3-half"," w3-center");
+    	frd.style = "height:500px; width:900px;";
+    	fsm.style = "display:block;";
+    	fs.style = "display:none;";
+    	document.getElementById("xframe").style = "display: block;"
+    }
+
+
+     function split() {
+     	var frd = document.getElementById("fr2");
+    	var b = document.getElementById("split");
+    	var b1 = document.getElementById("mobile");
+    	var b2 = document.getElementById("tablet");
+    	var b3 = document.getElementById("desktop");
+    	b1.className = b1.className.replace(" w3-blue"," ");
+    	b2.className = b2.className.replace(" w3-blue"," ");
+    	b3.className = b3.className.replace(" w3-blue"," ");
+    	var fs = document.getElementById("frs1");
+    	var fsm = document.getElementById("frs2");
+    	b.className = "w3-bar-item w3-button" + " w3-blue";
+    	fsm.className = fsm.className.replace("w3-center"," w3-half");
+    	fs.className = fs.className.replace("w3-center"," w3-half");
+    	frd.style = "height:500px; width:900px;";
+    	fsm.style = "display:block;";
+    	fs.style = "display:block;";
+    	document.getElementById("xframe").style = "display: block;"
+    }
+
+    function desktop() {
+    	var frd = document.getElementById("fr2");
+    	var b = document.getElementById("desktop");
+    	var b1 = document.getElementById("mobile");
+    	var b2 = document.getElementById("split");
+    	var b3 = document.getElementById("tablet");
+    	b1.className = b1.className.replace(" w3-blue"," ");
+    	b2.className = b2.className.replace(" w3-blue"," ");
+    	b3.className = b3.className.replace(" w3-blue"," ");
+    	var fs = document.getElementById("frs1");
+    	var fsm = document.getElementById("frs2");
+    	b.className = "w3-bar-item w3-button" + " w3-blue";
+    	fsm.className = fsm.className.replace("w3-half"," w3-center");
+    	fsm.style = "display:block;";
+    	frd.style = "height:500px; width:1260px;";
+    	fs.style = "display:none;";
+    	document.getElementById("xframe").style = "display: block;"
+    }
+
+    
+    function pmode() {
+    	var a = document.getElementById("ind");
+    	var c = document.getElementById("url");
+    	a.className = a.className.replace("w3-text-blue"," w3-text-green");
+    	document.getElementById("val").innerHTML = "Live";
+    	var modecolor = document.getElementById("val");
+    	modecolor.className = modecolor.className.replace("w3-text-blue"," w3-text-green");
+    	c.placeholder = "Project URL.."
+    	//framestate++
+    }
+
+    function toggle() {
+    	var a = document.getElementById("ind");
+    	var c = document.getElementById("url");
+    	a.className = a.className.replace("w3-text-green"," w3-text-blue");
+    	document.getElementById("val").innerHTML = "Local";
+    	var modecolor = document.getElementById("val");
+    	modecolor.className = modecolor.className.replace("w3-text-green"," w3-text-blue");
+    	c.placeholder = "Project Absolute Path.."
+        //framestate--  
+
+    }
+
+
+
+    function noproject() {
+    	    document.getElementById("noproject").style = "display: none;";
+
+    }
+
+
+    function mmode() {
+        var x12 = document.getElementById("nps");
+    	var j = document.getElementById("url");
+    	if ( j.value == [ ] ){
+    	document.getElementById("xframe").style.display = "none";
+    	document.getElementById("noproject").style = "display: block;";	
+    	}else{
+        x12.innerHTML = "<i class='fa fa-adjust w3-spin w3-text-blue'></i> Project Loaded!";
+        document.getElementById("banner").innerHTML = "<b class='w3-text-indigo'>URL/Path:</b> "+j.value +"";
+    	document.getElementById("xframe").style.display = "none";
+    	document.getElementById("noproject").style.display = "block";
+    }
+    	}
+    
+
+    function refresh() {
+    	document.getElementById("fr").src = "./fission.framer.html";
+    	document.getElementById("fr2").src = "./fission.framer.html";
+    }
+
+
+
+
+</script>
+ 
+</html>
