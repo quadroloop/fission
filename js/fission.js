@@ -3,11 +3,13 @@
 
  window.onload = function() {
   var bs = new PerfectScrollbar('#body');
- 	setTimeout("input1()",1000);
+  var ps = new PerfectScrollbar('#preferences');
+ 	setTimeout("input1()",200);
  }
 
  function input1() {
- 	document.getElementById('url').focus();
+ 	document.getElementById('url').classList.add('expand-active');
+    document.getElementById('url').focus();
  	document.getElementsByClassName('banner')[0].classList.add('pulse');
  	document.getElementById('settings').classList.add('pulse');
  }

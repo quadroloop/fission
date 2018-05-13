@@ -68,17 +68,13 @@ h1{
  	border: 1px solid #333;
  	background: rgba(0,0,0,0.3);
  	padding-left: 10px;
- 	width: 0px;
  	color: #fff;
  	border-radius: 2px;
+  width: 0px;
+  transition: 1s;
  }
 
- .input-home:focus {
- 	border: 1px solid #fff;
- 	max-width: 550px;
- 	width: 100%;
-/*    transition: 2s;
-*/ }
+ 
 
  .input-mask {
  	margin: 15px;
@@ -125,10 +121,8 @@ h1{
   font-weight: 400;
   line-height: 45px;
   margin: 0 0 2em;
-  max-width: 160px; 
   position: relative;
   text-decoration: none;
-  width: 100%; 
   
   }
 
@@ -140,16 +134,19 @@ h1{
   outline-color: rgba(255, 255, 255, .5);
   outline-offset: 0px;
   text-shadow: none;
-  transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+
 } 
 
-.expand:focus {
-  border: 1px solid;
+.expand-active {
+  border: 1px solid #fff;
   box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
   outline-color: rgba(255, 255, 255, 0);
   outline-offset: 15px;
-  text-shadow: 1px 1px 2px #427388; 
-  width: 100%;
+  text-shadow: 1px 1px 2px #427388;
+  max-width: 550px;
+      width: 100%; 
+  transition: 1.5s;
 }
 
 .pulse {
