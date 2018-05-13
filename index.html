@@ -1,274 +1,108 @@
 <!--
 ==============================================================================
 |#|  _____         _              |#|Fission Web/Web App. Development Tool.|#|
-|#| /  _(_)___ ___(_) ___  _ ___  |#|Split Screen UI Tester!               |#|                     
+|#| /  _(_)___ ___(_) ___  _ ___  |#|Split Screen UI Tester! v 2.0         |#|                     
 |#| | |_| / __/ __| |/ _ \| '_  \ |#|======================================|#|
 |#| |  _| \__ \__ \ | (_) | | | | |#|* The Project is OpenSource!          |#|
 |#| |_| |_|___/___/_|\___/|_| |_| |#| 2017 (c) Bryce Narciso C. Mercines   |#| 
 ==============================================================================
 -->
-<html>
+
+<hmtl>
 <head>
 <meta charset="utf-8">
-<title>Fission - Spit Screen - Web UI Tester tool</title>
-<link rel="stylesheet" type="text/css" href="./css/fission.css">
-<link rel="icon" href="fission.png">
-<!--google analytics-->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-106798516-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-    
-<script src="jquery.min.js"></script>
-<script type="text/javascript">
-$(window).load(function() {
-    $(".loader").fadeOut("slow");
-})
-
-</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<title>Fission - A Web UI Tester tool</title>
+<link rel="stylesheet" href="./css/fission.css">
+<link rel="stylesheet" href="./css/perfect-scrollbar.css">
+<link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<body style="background-color:e1e8ed;">
-<div class="loader">
-<center>
-<h3 class="w3-text-dark-grey w3-center" style="font-size:100px;margin-top:170px;"><i class="fa fa-adjust w3-spin "></i> <b class="w3-text-indigo">f</b>ission</h3>
-<p class="w3-text-blue thin">Free Web UI Tester tool.</p>
-<p class="w3-text-indigo thin">Loading...</p>
-</center>
-</div>
- <div id="spinner">
-<div class="w3-top">
-<div class="w3-bar w3-card-2" style="background-color:rgba(202, 210, 209, 0.75);">
-<a class="w3-bar-item w3-text-grey" style="font-size:19px;"><i class="fa fa-adjust w3-spin"></i> <b class="w3-text-indigo">f</b>ission</a>
-<div style="font-size:19px;" class="thin w3-text-dark-grey">
-<a id="mobile" onclick="mobile(); noproject();" class="w3-bar-item w3-button" title="Display Mobile Screen! (Small Devices)"><i class="fa fa-mobile"></i> Mobile </a>
-<a id="tablet" onclick="tablet(); noproject();" class="w3-bar-item w3-button" title="Display Tablet Screen! (Medium Devices)"><i class="fa fa-tablet"></i> Tablet</a>
-<a id="split" onclick="split(); noproject();" class="w3-bar-item w3-button"  title="Split Screen, mobile and tablet device combination."><i class="fa fa-columns"></i> Split</a>
-<a id="desktop" onclick="desktop(); noproject();" class="w3-bar-item w3-button"  title="Display Desktop Screen!, (Large Devices)"><i class="fa fa-desktop"></i> Desktop</a> 
-<button onclick="main()" class="w3-btn w3-bar-item w3-right w3-black w3-medium" style="font-size:19px;"><i class="w3-spin fa fa-adjust fa-2x" title="Load Project!"></i></button>
-<input type="text" id="url" class="w3-input w3-hover-pale-green w3-bar-item w3-right" placeholder="Project Here!" style="font-size:19px;" title="Input project Address"></input>
-<a onclick="refresh();" class="w3-bar-item w3-button" title="Refresh Frames"><i class="fa fa-refresh w3-text-blue"></i> <b class="w3-text-indigo">Refresh</b></a>  
-<a id="mmode" onclick="mmode();" class="w3-bar-item w3-button" title="Minimize Project Window and View help"><i class="fa fa-comment w3-text-blue"></i> <b class="w3-text-indigo">Help</b></a>  
-<a href="./fission.local.html" download="fission" class="w3-bar-item w3-button download" title="Download, Fission for local Project Testing"><i class="fa fa-download w3-text-blue"></i></a>  
-<a id="pmode" class="w3-bar-item w3-button w3-right" title="Project Mode"><i id="ind" class="fa fa-circle w3-text-blue"></i> <b id="val" class="w3-text-blue">Link</b></a>  
-</div>
-</div>
-</div>
-<br>
-<br>
-
-<div id="noproject" style="display: block;">
- <h3 class="w3-text-dark-grey w3-center" style="font-size:100px" id="nps"><i class="fa fa-adjust w3-spin "></i> No Project.</h3>
- <h4 class="w3-text-grey w3-center">Put the Project Location on the <b class="w3-text-indigo">"Project Here"</b> box, to load a project!</h4>
- <center>
- <p id="banner"></p>
- </center>
- <p class="w3-text-grey w3-center"><b class="w3-text-indigo">How to Use:</b></p>
- <center>
-  <p class="w3-text-blue w3-padding">Simply type a link and press "Enter".</p>
- <img src="live.png" class="w3-border w3-card-2">
- <p>Live Mode <b class="w3-text-indigo">(Websites:)</b> Type the complete URL of your website, or other websites and the session will autommatically be live.</p>
-<p class="w3-text-green">Download Fission to use Local Mode.<br>also, make sure the website your testing supports iframe.</p>
- <img src="windows.png" class="w3-card-2 w3-border w3-margin"><br>
- <p>Local Mode in <b class="w3-text-indigo">Windows:</b> Type the absolute path of your project files like so...</p>
- <img src="linux.png" class="w3-border w3-card-2"><br>
- <p>Local Mode in <b class="w3-text-indigo">Linux:</b> Type the absolute path of your project files like so.. it's obvious if your familiar with file systems of all operating systems.</p>
- 
- 
-
- </center>
-</div>
-<!--split-->
-<div id="xframe" class="w3-margin w3-container w3-white w3-round w3-card-4 w3-animate-bottom mode" style="display:none;">
-
-    <div id="frs1" class="w3-half" width="100px">
-     <iframe id="fr" src="" style="height:500px; width:360px;" class="w3-margin w3-round w3-animate-opacity"></iframe>
+<body id="body">
+    <div id="nav">
+        <ul>
+           <li><i id="settings" class="fa fa-sliders" onclick="openSettings();"></i></li>
+        </ul>
     </div>
-
-    <div id="frs2" class="w3-half">
-      <iframe id="fr2" src="" style="height:500px; width:900px;" class="w3-margin w3-round w3-animate-opacity"></iframe>
+    <div id="home">
+      <div>
+        <center>
+            <h1 class="banner">FissioN</h1>
+            <div class="input-mask">
+               <input type="text" id="url" placeholder="URL here: http://.." class="input-home btn expand" autocomplete="off">
+            </div>
+        </center>
+         <div id="screens"></div>
+       </div> 
     </div>
+   <div class="footlinks">
+      <a href="https://github.com/quadroloop/fission"><i class="fa fa-github"></i> Quadroloop | Fission | Bryce Mercines <script>document.write((new Date()).getFullYear());</script></a>
+   </div>
+   <div id="preferences" class="animate-left">
+       <div class="container">
+           <h1>FissioN</h1>
+           <hr>
+           <div class="row"> 
+  <div class="column">
+      <container>
+           <h1>How to Use</h1>
+           <p>First you need to provide a <strong>site URL.</strong>, then press <strong>enter</strong></p>
+           <p><strong>Example:</strong></p>
+           <p><a class="p-btn pref-btn">https://quardoloop.github.io/Fission</a><p>
+           <p>then you can <strong>switch</strong> between <strong>screen sizes</strong> by click the device size icons or pressing <strong> esc key</strong></p>
+           <p>
+              <a class="">
+                  <i class="fa fa-mobile fa-2x icon" title="Mobile"></i>
+                  <i class="fa fa-tablet fa-2x icon" title="Tablet"></i>
+                  <i class="fa fa-desktop fa-2x icon" title="Desktop"></i>
+                  <i class="fa fa-qrcode fa-2x icon" title="link to site"></i>
+                 <!--  <i class="fa fa fa-clone fa-2x icon" title="Split"></i>
+                  <i class="fa fa fa-th fa-2x icon" title="All"></i> -->
+                  <i class="fa fa-plus fa-2x icon" title="Add Screen"></i>
+              </a>
+                <span class="icon"><strong>or</strong></span>
+              <a class="p-btn pref-btn">
+                 <strong>ESC</strong>
+              </a>  
+            </p>
+<!--             <a class="p-btn pref-btn"><i class="fa fa-download"></i> Download Fission</a>
+ -->      </container>     
   </div>
-  <!--end split-->
+  <div class="column right-column">
+      <div class="container">
+          <h1>About</h1>
+          <p><strong>Fission</strong> is a simple, Open-source Web UI Testing tool, for testing responsive ui layout built in Native Javascript, CSS and HTML</p>
+          <p>The project is currently at <strong>version 2.0</strong> with <strong>Version 1.0</strong> originally built in 2017</p>
+          <p><a class="p-btn pref-btn"><i class="fa fa-github"></i> View on github</a><p>
+          <p><a class="p-btn pref-btn"><i class="fa fa-cube"></i> Version 1.0</a><p>
+<!--           <p><a class="p-btn pref-btn"><i class="fa fa-github"></i> View on github</a><p>
+ -->      </div>
+  </div>  
+</div>
+</div>
+   <center>
+       <a class="p-btn pref-btn" onclick="closeSettings();"><i class="fa fa-close"></i> Close </a>
+   </center>   
+   </div>
+   <div id="menu" class="animate-left">
+       <ul>
+          <li class="btn item" id="mobile" onclick="itemselect(this.id)"><i class="fa fa-mobile pl-10"></i></li>
+          <li class="btn item" id="tablet" onclick="itemselect(this.id)"><i class="fa fa-tablet pl-8"></i></li>
+          <li class="btn item" id="desktop" onclick="itemselect(this.id)"><i class="fa fa-desktop"></i></li>
+         <!--  <li class="btn item" id="clone" onclick="itemselect(this.id)"><i class="fa fa-clone"></i></li>
+          <li class="btn item" id="all" onclick="itemselect(this.id)"><i class="fa fa-th"></i></li> -->
+<!--             <li class="btn item" id="qr" onclick="itemselect(this.id)"><i class="fa fa-qrcode pl-5"></i></li>
+ -->         <!--  <li class="btn item" id="append" onclick="itemselect(this.id)"><i class="fa fa-plus pl-5"></i></li> -->
+       </ul>
+   </div>
+   <div id="qr_data" class="modal fade-In" onclick="this.style.display='none'">
+       <div id="mcontent" class="modal-content btn react">
+         <div>sadjasdkfaksldj;lksdafjlaksdfjal;kf</div>
+       </div>
+   </div>
 </body>
+   <script type="text/javascript" src="./js/perfect-scrollbar.js"></script>
+   <script type="text/javascript" src="./js/fission.js"></script>
+</hmtl>
 
-<script>
-   
-       var framestate = 1;
-
-
-    var urx = document.getElementById("url");
-     urx.addEventListener("keydown", function (e) {
-      if (e.keyCode === 13) { 
-        if ( urx.value == [     ] ) {
-          alert("Enter a project path!");
-        }else{
-        main();
-        document.getElementById("nps").innerHTML = "fuck!";
-    }
-      }
-    });
-
-
-
-      function main() {
-        var x = document.getElementById("url").value;
-    document.getElementById("noproject").style = "display: none;"
-
-      if ( x.indexOf("https://") != -1 || x.indexOf("http://") != -1 ){
-        pmode();
-      }else{
-        alert("Local Mode is not available online. click 'Download', to use it.");
-        toggle();
-          }
-        
-         localStorage.setItem('frurl',x);
-         document.getElementById("fr").src = "./fission.framer.html";
-    document.getElementById("fr2").src = "./fission.framer.html";
-    document.getElementById("xframe").style = "display: block;" 
-  }
-
-    function mobile() {
-        var frd = document.getElementById("fr2");
-        var b = document.getElementById("mobile");
-        var b1 = document.getElementById("tablet");
-        var b2 = document.getElementById("split");
-        var b3 = document.getElementById("desktop");
-        var fs = document.getElementById("frs2");
-        var fsm = document.getElementById("frs1");
-        b1.className = b1.className.replace(" w3-blue"," ");
-        b2.className = b2.className.replace(" w3-blue"," ");
-        b3.className = b3.className.replace(" w3-blue"," ");
-        b.className = "w3-bar-item w3-button" + " w3-blue";
-        fsm.className = fsm.className.replace("w3-half"," w3-center");
-        frd.style = "height:500px; width:900px;";
-        fsm.style = "display:block;";
-        fs.style = "display:none;";
-        document.getElementById("xframe").style = "display: block;"
-    }
-
-     function tablet() {
-        var frd = document.getElementById("fr2");
-        var b = document.getElementById("tablet");
-        var b1 = document.getElementById("mobile");
-        var b2 = document.getElementById("split");
-        var b3 = document.getElementById("desktop");
-        b1.className = b1.className.replace(" w3-blue"," ");
-        b2.className = b2.className.replace(" w3-blue"," ");
-        b3.className = b3.className.replace(" w3-blue"," ");
-        var fs = document.getElementById("frs1");
-        var fsm = document.getElementById("frs2");
-        b.className = "w3-bar-item w3-button" + " w3-blue";
-        fsm.className = fsm.className.replace("w3-half"," w3-center");
-        frd.style = "height:500px; width:900px;";
-        fsm.style = "display:block;";
-        fs.style = "display:none;";
-        document.getElementById("xframe").style = "display: block;"
-    }
-
-
-     function split() {
-        var frd = document.getElementById("fr2");
-        var b = document.getElementById("split");
-        var b1 = document.getElementById("mobile");
-        var b2 = document.getElementById("tablet");
-        var b3 = document.getElementById("desktop");
-        b1.className = b1.className.replace(" w3-blue"," ");
-        b2.className = b2.className.replace(" w3-blue"," ");
-        b3.className = b3.className.replace(" w3-blue"," ");
-        var fs = document.getElementById("frs1");
-        var fsm = document.getElementById("frs2");
-        b.className = "w3-bar-item w3-button" + " w3-blue";
-        fsm.className = fsm.className.replace("w3-center"," w3-half");
-        fs.className = fs.className.replace("w3-center"," w3-half");
-        frd.style = "height:500px; width:900px;";
-        fsm.style = "display:block;";
-        fs.style = "display:block;";
-        document.getElementById("xframe").style = "display: block;"
-    }
-
-    function desktop() {
-        var frd = document.getElementById("fr2");
-        var b = document.getElementById("desktop");
-        var b1 = document.getElementById("mobile");
-        var b2 = document.getElementById("split");
-        var b3 = document.getElementById("tablet");
-        b1.className = b1.className.replace(" w3-blue"," ");
-        b2.className = b2.className.replace(" w3-blue"," ");
-        b3.className = b3.className.replace(" w3-blue"," ");
-        var fs = document.getElementById("frs1");
-        var fsm = document.getElementById("frs2");
-        b.className = "w3-bar-item w3-button" + " w3-blue";
-        fsm.className = fsm.className.replace("w3-half"," w3-center");
-        fsm.style = "display:block;";
-        frd.style = "height:500px; width:1260px;";
-        fs.style = "display:none;";
-        document.getElementById("xframe").style = "display: block;"
-    }
-
-    
-    function pmode() {
-        var a = document.getElementById("ind");
-        var c = document.getElementById("url");
-        a.className = a.className.replace("w3-text-blue"," w3-text-green");
-        document.getElementById("val").innerHTML = "Live";
-        var modecolor = document.getElementById("val");
-        modecolor.className = modecolor.className.replace("w3-text-blue"," w3-text-green");
-        c.placeholder = "Project URL.."
-        //framestate++
-    }
-
-    function toggle() {
-        var a = document.getElementById("ind");
-        var c = document.getElementById("url");
-        a.className = a.className.replace("w3-text-green"," w3-text-blue");
-        document.getElementById("val").innerHTML = "Link here";
-        var modecolor = document.getElementById("val");
-        modecolor.className = modecolor.className.replace("w3-text-green"," w3-text-blue");
-        c.placeholder = "Url here.."
-        //framestate--  
-
-    }
-
-
-
-    function noproject() {
-            document.getElementById("noproject").style = "display: none;";
-
-    }
-
-
-    function mmode() {
-        var x12 = document.getElementById("nps");
-        var j = document.getElementById("url");
-        if ( j.value == [ ] ){
-        document.getElementById("xframe").style.display = "none";
-        document.getElementById("noproject").style = "display: block;"; 
-        }else{
-        x12.innerHTML = "<i class='fa fa-adjust w3-spin w3-text-blue'></i> Project Loaded!";
-        document.getElementById("banner").innerHTML = "<b class='w3-text-indigo'>URL/Path:</b> "+j.value +"";
-        document.getElementById("xframe").style.display = "none";
-        document.getElementById("noproject").style.display = "block";
-    }
-        }
-    
-
-    function refresh() {
-        document.getElementById("fr").src = "./fission.framer.html";
-        document.getElementById("fr2").src = "./fission.framer.html";
-    }
-
-
-
-
-</script>
-
-
- 
-</html>
