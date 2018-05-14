@@ -1,6 +1,12 @@
  // Fission.js 2.0
  // Bryce Mercines 2018
 
+    var qrcode = new QRCode(document.getElementById("qr_code"), {
+            width : 225,
+            height : 225
+          });
+
+
  window.onload = function() {
   var bs = new PerfectScrollbar('#body');
   var ps = new PerfectScrollbar('#preferences');
@@ -88,7 +94,8 @@ function setMode(data) {
     break;
     case 'qr':
      document.getElementById('qr_data').style.display = "block";
-     setTimeout("document.getElementById('mcontent').classList.add('react-expand');",1000);
+     setTimeout("document.getElementById('mcontent').classList.add('react-expand');",200);
+     qrcode.makeCode(document.getElementById('url').value);
     break;
     default:
       mode = data;
@@ -104,3 +111,7 @@ function frame_unselect(frame) {
   document.getElementById(frame).classList.remove('window-focus');
 }
 
+function modal(modal) {
+  modal.style.display = 'none';
+  document.getElementById('mcontent').classList.remove('react-expand');
+}
